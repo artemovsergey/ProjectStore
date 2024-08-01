@@ -17,4 +17,10 @@
       <Folder Include="Services\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ProjectStore.Application\ProjectStore.Application.csproj" />
+      <ProjectReference Include="..\ProjectStore.Domen\ProjectStore.Domen.csproj" />
+      <ProjectReference Include="..\ProjectStore.Infrastructure\ProjectStore.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
