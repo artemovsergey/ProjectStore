@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjectStore.Domen")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+431aca77328640aa5deb3872f4d76dc701476ac2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjectStore.Domen")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjectStore.Domen")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
