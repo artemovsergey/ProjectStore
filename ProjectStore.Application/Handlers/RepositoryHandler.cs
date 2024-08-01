@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProjectStore.Application.Requests;
 using ProjectStore.Infrastructure.Data;
@@ -21,7 +22,7 @@ public class UsersHandler : IRequestHandler<RepositoryRequest, RepositoryRequest
         _log.LogWarning("Обработка запроса из базы данных!");
        
         //var users = new List<User>() { new User() { Id = 1, Name = "user", Login = "login", Password = "password" } };
-        var users = _db.Repositories.ToList();
+        var users = await _db.Repositories.ToListAsync();
         
         
         
