@@ -2,8 +2,8 @@
 
 # ProjectStore.Infrastructure
 
-ProjectStore.Infrastructure/bin
-ProjectStore.Infrastructure/obj
+ProjectStore.Infrastructure\bin
+ProjectStore.Infrastructure\obj
 
 ProjectStore.API/bin
 ProjectStore.API/obj
