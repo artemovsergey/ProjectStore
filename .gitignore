@@ -5,7 +5,7 @@
 
 # Debug
 bin/
-obj/
+ProjectStore.Infrastructure/obj/
 
 # Idea
 /.idea
