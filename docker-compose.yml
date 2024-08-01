@@ -1,0 +1,36 @@
+﻿networks:
+  network:
+    driver: bridge
+    
+volumes:
+  postgres_data:
+
+services:
+  
+  api:
+    container_name: ProjectStoreAPI
+    image: projectstore.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    build:
+      context: .
+      dockerfile: ProjectStore.API/Dockerfile
+    ports:
+      - "5015:5001"
+    networks:
+      - network
+  db:
+    image: postgres:latest
+    container_name: ProjectStorePostgreSQL
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ProjectStore
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - network
+    
+

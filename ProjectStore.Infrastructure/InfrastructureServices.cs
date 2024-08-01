@@ -11,8 +11,7 @@ public static class InfrastructureServicesRegistration
     {
         services.AddDbContext<ProjectStoreContext>(opts =>
         {
-            opts.UseNpgsql(configuration.GetConnectionString("Postgres") ??
-                           "Host=localhost;Port=5432;Database=ProjectStore;Username=postgres;Password=root");
+            opts.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
         });
         
         return services;
