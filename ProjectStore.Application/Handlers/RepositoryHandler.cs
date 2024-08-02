@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -7,11 +6,11 @@ using ProjectStore.Infrastructure.Data;
 
 namespace ProjectStore.Application.Handlers;
 
-public class UsersHandler : IRequestHandler<RepositoryRequest, RepositoryRequest.Response>
+public class RepositoryHandler : IRequestHandler<RepositoryRequest, RepositoryRequest.Response>
 {
     private readonly ProjectStoreContext _db;
-    private readonly ILogger<UsersHandler> _log;
-    public UsersHandler(ProjectStoreContext db, ILogger<UsersHandler> log)
+    private readonly ILogger<RepositoryHandler> _log;
+    public RepositoryHandler(ProjectStoreContext db, ILogger<RepositoryHandler> log)
     {
         _db = db;
         _log = log;
@@ -23,8 +22,6 @@ public class UsersHandler : IRequestHandler<RepositoryRequest, RepositoryRequest
        
         //var users = new List<User>() { new User() { Id = 1, Name = "user", Login = "login", Password = "password" } };
         var users = await _db.Repositories.ToListAsync();
-        
-        
         
         return new RepositoryRequest.Response(users);
     }

@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectStore.Application.Requests;
+using ProjectStore.Domen.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace ProjectStore.API.Controllers;
@@ -33,6 +34,54 @@ public class RepositoryController : ControllerBase
             return NotFound("Репозитории не найдены");
         }
         return Ok(response.users);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerOperation(Summary = "Создание репозитория.")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Repo created success")]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "Repo not created", typeof(ValidationProblemDetails))]
+    public async Task<ActionResult<Repository>> PostRepository([FromBody] Repository repo)
+    {
+        var response = await _mediator.Send(new AddRepositoryRequest(repo));
+        if(response.repo == null)
+        {
+            return BadRequest("Репозиторий не создан!");
+        }
+        return Ok("Новый репозиторий создан!");
+    }
+    
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerOperation(Summary = "Редактирование репозитория.")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Repo edited success")]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "Repo not edited", typeof(ValidationProblemDetails))]
+    public async Task<ActionResult<Repository>> EditRepository([FromBody] Repository repo)
+    {
+        var response = await _mediator.Send(new EditRepositoryRequest(repo));
+        if(response.repo == null)
+        {
+            return BadRequest("Репозиторий не отредактирован!");
+        }
+        return Ok("Репозиторий отредактирован!");
+    }
+    
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerOperation(Summary = "Удаление репозитория.")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Repo deleted success")]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "Repo not deleted", typeof(ValidationProblemDetails))]
+    public async Task<ActionResult<bool>> DeleteRepository([FromBody] Repository repo)
+    {
+        var response = await _mediator.Send(new DeleteRepositoryRequest(repo));
+        if(response.Result == false)
+        {
+            return BadRequest("Репозиторий не удален!");
+        }
+        return Ok("Репозиторий удален!");
     }
     
 }
