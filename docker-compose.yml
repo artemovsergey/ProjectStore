@@ -27,6 +27,17 @@ services:
     build:
       context: .
       dockerfile: Presentation/Example.Angular/Dockerfile
+      
+    develop:
+      watch:
+        - action: sync
+          path: .Presentation/Example.Angular/src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+          
     ports:
       - "4201:4200"
     depends_on:
