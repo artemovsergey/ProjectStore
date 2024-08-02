@@ -12,5 +12,5 @@ import { HeaderComponent } from "./components/header/header.component";
 
 
 export class AppComponent {
-  title = 'Example.Angular';
+  title = 'ProjectStore';
 }

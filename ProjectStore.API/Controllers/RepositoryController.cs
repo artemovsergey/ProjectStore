@@ -20,24 +20,30 @@ public class RepositoryController : ControllerBase
     }
     
     //[Authorize(Roles = "User, Admin")]
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Получает все репозитории.")]
     [SwaggerResponse(StatusCodes.Status200OK, "All repo successfully retrieved")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Repo not found", typeof(ValidationProblemDetails))]
-    public async Task<IActionResult> GetAllRepositories()
+    public async Task<IActionResult> GetAllRepositories(string? sortColumn = null,
+        string? sortOrder = null,
+        int pageIndex = 0,
+        int pageSize = 10,
+        string? filterColumn = null,
+        string? filterQuery = null)
     {
-        var response = await _mediator.Send(new RepositoryRequest());
-        if(response.users == null)
+        var response = await _mediator.Send(new RepositoryRequest(sortColumn,sortOrder,pageIndex,pageSize,filterColumn,filterQuery));
+        
+        if(response.result == null)
         {
             return NotFound("Репозитории не найдены");
         }
-        return Ok(response.users);
+        return Ok(response.result);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -91,5 +97,9 @@ public class RepositoryController : ControllerBase
         }
         return Ok("Репозиторий удален!");
     }
+    
+    
+    
+    
     
 }

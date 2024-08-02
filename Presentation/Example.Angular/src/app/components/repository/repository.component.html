@@ -1,0 +1,65 @@
+<p *ngIf="!repositories"><em>Loading...</em></p>
+
+<mat-form-field *ngIf="repositories">
+  <input matInput #filter (keyup)="loadData(filter.value)" placeholder="Поиск">
+</mat-form-field>
+
+
+<table mat-table [dataSource]="repositories"
+       class="mat-elevation-z8"
+       [hidden]="!repositories"
+       matSort (matSortChange)="loadData()"
+       [matSortActive]="defaultSortColumn"
+       [matSortDirection]="defaultSortOrder">
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+    <td mat-cell *matCellDef="let r">{{r.id}}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
+    <td mat-cell *matCellDef="let r">{{r.name}}</td>
+  </ng-container>
+  <!-- Lat Column -->
+  <ng-container matColumnDef="owner">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Автор</th>
+    <td mat-cell *matCellDef="let r">{{r.owner}}</td>
+  </ng-container>
+  <!-- Lon Column -->
+  <ng-container matColumnDef="stargazers">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Звезды</th>
+    <td mat-cell *matCellDef="let r">{{r.stargazers}}</td>
+  </ng-container>
+
+  <!-- Lon Column -->
+  <ng-container matColumnDef="watchers">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Просмотры</th>
+    <td mat-cell *matCellDef="let r">{{r.watchers}}</td>
+  </ng-container>
+
+  <!-- Lon Column -->
+  <ng-container matColumnDef="url">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Открыть</th>
+    <td mat-cell *matCellDef="let r">
+
+      <a mat-flat-button color="primary" href="{{r.url}}">
+        Репозиторий
+      </a>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- Pagination directive -->
+<mat-paginator [hidden]="!repositories"
+               (page)="getData($event)"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons>
+</mat-paginator>
+
