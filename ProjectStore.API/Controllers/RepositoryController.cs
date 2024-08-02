@@ -20,6 +20,7 @@ public class RepositoryController : ControllerBase
     }
     
     //[Authorize(Roles = "User, Admin")]
+    [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -36,6 +37,7 @@ public class RepositoryController : ControllerBase
         return Ok(response.users);
     }
 
+    [Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -52,6 +54,7 @@ public class RepositoryController : ControllerBase
         return Ok("Новый репозиторий создан!");
     }
     
+    [Authorize]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,6 +71,11 @@ public class RepositoryController : ControllerBase
         return Ok("Репозиторий отредактирован!");
     }
     
+    
+    
+    //TODO Оптимизировать
+    
+    [Authorize]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
