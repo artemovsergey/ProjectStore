@@ -24,6 +24,6 @@ jobs:
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
             rm -rf /home/artik3314/project
-            git clone https://github.com/artemovsergey/React.git /home/artik3314/project/
+            git clone https://github.com/artemovsergey/ProjectStore.git /home/artik3314/project/
             chmod +x /home/artik3314/project/scripts/vps.sh
             /home/artik3314/project/scripts/vps.sh
