@@ -10,9 +10,9 @@ public  class ProjectStoreContext : DbContext
 
     public ProjectStoreContext(DbContextOptions<ProjectStoreContext> opt) : base(opt)
     {
-        //Database.EnsureDeleted();
+        Database.EnsureDeleted();
         //Database.EnsureCreated();
-        Database.Migrate();
+        //Database.Migrate();
     }
     
     // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
