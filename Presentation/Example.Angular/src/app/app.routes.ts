@@ -5,8 +5,8 @@ import { RepositoryComponent } from './components/repository/repository.componen
 
 // определение маршрутов
 export const routes: Routes =[
-    { path: 'home', component: RepositoryComponent},
+    { path: '', component: RepositoryComponent},
     { path: 'login', component: LoginComponent},
-    { path: 'contact', redirectTo: 'login', pathMatch:'full'}, // переадресация c полным соответствием
+    { path: 'home', redirectTo: 'login', pathMatch:'full'}, // переадресация c полным соответствием
     { path: '**', component: LoginComponent } // если не подходит все маршруты
   ];
