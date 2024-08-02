@@ -9,6 +9,8 @@ ProjectStore.API/obj
 ProjectStore.Application/bin
 ProjectStore.Application/obj
 
+Presentation/Example.React/node_modules
+
 .idea
 
 # User specific

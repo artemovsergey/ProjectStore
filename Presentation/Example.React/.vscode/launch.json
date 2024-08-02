@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "localhost (Chrome)",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "args": ["--new-window=false"]
+    },
+    {
+      "type": "edge",
+      "request": "launch",
+      "name": "localhost (Edge)",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    }
+
+  ]
+}
