@@ -9,7 +9,23 @@ env:
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   
 jobs:
+  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.33'
+
+      - name: Install dependencies and run tests
+        run: |
+          dotnet restore
+          dotnet test --verbosity normal
+
   publish:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
