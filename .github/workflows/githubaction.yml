@@ -21,7 +21,6 @@ jobs:
 
       - name: Install dependencies and run tests
         run: |
-          dotnet restore
           dotnet test --verbosity normal
 
   publish:
