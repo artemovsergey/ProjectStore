@@ -7,6 +7,20 @@ volumes:
 
 services:
   
+  nginx:
+    container_name: ProjectStoreNginx
+    build:
+      context: .
+      dockerfile: loadbalancer/Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - network
+    depends_on:
+      - api
+  
   api:
     container_name: ProjectStoreAPI
     image: projectstore.api
@@ -19,6 +33,8 @@ services:
       - "5015:5001"
     networks:
       - network
+    depends_on:
+      - db
   db:
     image: postgres:latest
     container_name: ProjectStorePostgreSQL
@@ -27,7 +43,7 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: ProjectStore
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
