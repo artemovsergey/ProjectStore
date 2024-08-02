@@ -20,7 +20,7 @@ public class RepositoryController : ControllerBase
     }
     
     //[Authorize(Roles = "User, Admin")]
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,7 +43,7 @@ public class RepositoryController : ControllerBase
         return Ok(response.result);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
