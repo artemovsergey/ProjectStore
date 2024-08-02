@@ -16,6 +16,10 @@ COPY . .
 WORKDIR "/src/ProjectStore.API"
 RUN dotnet build "ProjectStore.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# Тестиррование
+#FROM build AS tests
+#RUN dotnet test "ProjectStore.API/ProjectStore.API.csproj"
+
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "ProjectStore.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
