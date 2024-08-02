@@ -20,6 +20,19 @@ services:
       - network
     depends_on:
       - api
+        
+  angular:
+    container_name: ProjectStoreAngular
+    restart: always
+    build:
+      context: .
+      dockerfile: Presentation/Example.Angular/Dockerfile
+    ports:
+      - "4201:4200"
+    depends_on:
+      - api
+    networks:
+      - network
   
   api:
     container_name: ProjectStoreAPI
