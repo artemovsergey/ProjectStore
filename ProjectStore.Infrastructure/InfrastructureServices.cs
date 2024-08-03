@@ -14,6 +14,15 @@ public static class InfrastructureServicesRegistration
             opts.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
         });
         
+        
+        //Add ApplicationDbContext and SQL Server support
+         services.AddDbContext<ApplicationContext>(options =>
+             options.UseSqlServer(
+                 configuration.GetConnectionString("DefaultConnection")
+             )
+         );
+        
+        
         return services;
     }
 }
