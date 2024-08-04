@@ -19,8 +19,8 @@ public class RepositoryController : ControllerBase
         _mediator = mediatr;
     }
     
-    //[Authorize(Roles = "User, Admin")]
     [Authorize]
+    //[Authorize(Roles = "Administrator")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -34,16 +34,18 @@ public class RepositoryController : ControllerBase
         string? filterColumn = null,
         string? filterQuery = null)
     {
-        var response = await _mediator.Send(new RepositoryRequest(sortColumn,sortOrder,pageIndex,pageSize,filterColumn,filterQuery));
-        
-        if(response.result == null)
-        {
-            return NotFound("Репозитории не найдены");
-        }
-        return Ok(response.result);
+        // var response = await _mediator.Send(new RepositoryRequest(sortColumn,sortOrder,pageIndex,pageSize,filterColumn,filterQuery));
+        //
+        // if(response.result == null)
+        // {
+        //     return NotFound("Репозитории не найдены");
+        // }
+        // return Ok(response.result);
+
+        return Ok();
     }
 
-    [Authorize]
+   
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

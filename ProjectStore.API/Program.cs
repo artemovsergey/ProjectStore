@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]));
+
+
 Console.WriteLine(key);
 
 builder.Services.AddApplicationServices();
@@ -44,7 +46,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddCors();
 
-//аутентификация на основе jwt
+//аутентификация на основе jwt: JwtBearerMiddleware
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -57,6 +59,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = configuration["Jwt:Issuer"],
             ValidAudience = configuration["Jwt:Audience"],
             IssuerSigningKey = key,
+            //IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecurityKey"]))
         };
     });
 
@@ -83,6 +86,8 @@ app.UseHttpsRedirection();
 app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.UseAuthentication();
+
+// identity
 app.UseAuthorization();
 app.MapControllers();
 
