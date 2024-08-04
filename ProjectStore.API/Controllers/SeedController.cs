@@ -25,9 +25,23 @@ public class SeedController : ControllerBase
 
 
     [HttpGet]
-    public ActionResult CreateDefaultUsers()
+    public async Task<ActionResult> CreateDefaultUsers()
     {
-        return Ok();
+        string message;
+        var user = new ApplicationUser() { Email = "user@email.com", Password = "123" };
+        try
+        {
+            _context.Add(user);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            message = e.InnerException.ToString();
+            Console.WriteLine(e.InnerException);
+            return BadRequest(message);
+        }
+        
+        return Ok($"Пользователь email: {user.Email} password: {user.Password}");
     }
 
 }
