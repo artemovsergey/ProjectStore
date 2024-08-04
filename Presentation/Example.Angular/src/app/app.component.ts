@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth-service';
+
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 
@@ -13,4 +15,11 @@ import { HeaderComponent } from "./components/header/header.component";
 
 export class AppComponent {
   title = 'ProjectStore';
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.authService.init();
+  }
+
 }

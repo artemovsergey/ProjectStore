@@ -1,34 +1,33 @@
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ProjectStore.Domen.Models;
+using Microsoft.EntityFrameworkCore;
 using ProjectStore.Infrastructure.Data;
 
 namespace ProjectStore.API.Controllers;
 
+[ApiController]
+[Route("api/[controller]/[action]")]
 public class AccountController : ControllerBase
 {
     private readonly ApplicationContext _context;
-    private readonly UserManager<ApplicationUser> _userManager;
     private readonly JwtHandler _jwtHandler;
     
     public AccountController(
         ApplicationContext context,
-        UserManager<ApplicationUser> userManager,
         JwtHandler jwtHandler)
     {
         _context = context;
-        _userManager = userManager;
         _jwtHandler = jwtHandler;
     }
     
-    [HttpPost("Login")]
+    [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
-        var user = await _userManager.FindByNameAsync(loginRequest.Email);
+        var user = await _context.Users.Where(u => u.Email == loginRequest.Email).FirstOrDefaultAsync();
+        var password = await _context.Users.Where(u => u.Password == loginRequest.Password).FirstOrDefaultAsync();
+        
         if (user == null
-            || !await _userManager.CheckPasswordAsync(user, loginRequest.
-                Password))
+            || password == null)
             return Unauthorized(new LoginResult() {
                 Success = false,
                 Message = "Invalid Email or Password."

@@ -1,7 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProjectStore.Domen.Models;
@@ -11,16 +10,10 @@ namespace ProjectStore.Infrastructure.Data;
 public class JwtHandler
 {
     private readonly IConfiguration _configuration;
-    private readonly UserManager<ApplicationUser> _userManager;
     
-    public JwtHandler(
-        IConfiguration configuration,
-        UserManager<ApplicationUser> userManager
-    )
-    
+    public JwtHandler(IConfiguration configuration)
     {
         _configuration = configuration;
-        _userManager = userManager;
     }
     
     
@@ -50,10 +43,14 @@ public class JwtHandler
         {
             new Claim(ClaimTypes.Name, user.Email)
         };
-        foreach (var role in await _userManager.GetRolesAsync(user))
+
+        var roles = new List<string>() { "Администратор", "Менеджен" };
+        
+        foreach (var role in roles)
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
         }
+        
         return claims;
     }
 

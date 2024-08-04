@@ -34,15 +34,13 @@ public class RepositoryController : ControllerBase
         string? filterColumn = null,
         string? filterQuery = null)
     {
-        // var response = await _mediator.Send(new RepositoryRequest(sortColumn,sortOrder,pageIndex,pageSize,filterColumn,filterQuery));
-        //
-        // if(response.result == null)
-        // {
-        //     return NotFound("Репозитории не найдены");
-        // }
-        // return Ok(response.result);
-
-        return Ok();
+        var response = await _mediator.Send(new RepositoryRequest(sortColumn,sortOrder,pageIndex,pageSize,filterColumn,filterQuery));
+        
+        if(response.result == null)
+        {
+            return NotFound("Репозитории не найдены");
+        }
+        return Ok(response.result);
     }
 
    

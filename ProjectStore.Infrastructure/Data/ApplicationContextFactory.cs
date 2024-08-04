@@ -12,7 +12,7 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
     public ApplicationContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ProjectStore;Trusted_Connection=True;MultipleActiveResultSets=true");
+        optionsBuilder.UseSqlServer("Server=localhost,1433;Database=ProjectStore;User Id=sa;Password=;TrustServerCertificate=True");
 
         return new ApplicationContext(optionsBuilder.Options);
     }
