@@ -7,13 +7,13 @@ namespace ProjectStore.Infrastructure.Data;
 /// Клаас для работы автогенерации restAPI черезе IDE по модели и контексту
 /// если конструктор с параметрами
 /// </summary>
-public class ProjectStoreContextFactory : IDesignTimeDbContextFactory<ProjectStoreContext>
+public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
 {
-    public ProjectStoreContext CreateDbContext(string[] args)
+    public ApplicationContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<ProjectStoreContext>();
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ProjectStore;Username=postgres;Password=root");
+        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ProjectStore;Trusted_Connection=True;MultipleActiveResultSets=true");
 
-        return new ProjectStoreContext(optionsBuilder.Options);
+        return new ApplicationContext(optionsBuilder.Options);
     }
 }
