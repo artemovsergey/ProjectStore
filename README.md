@@ -19,6 +19,8 @@
 ```https://asvapp.ru/swagger```
 
 **Замечание**: swagger генерирует jwt токен 
+- Email: user@email.com
+- Password: 123
 
 
 # Задача

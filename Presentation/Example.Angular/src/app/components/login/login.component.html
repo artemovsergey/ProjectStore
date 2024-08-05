@@ -1,25 +1,25 @@
 <div class="login">
-  <h1>Login</h1>
+  <h1>ProjectStore</h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p>
       <mat-error *ngIf="loginResult && !loginResult.success">
-        <strong>ERROR</strong>: {{loginResult.message}}
+        <strong>Ошибка</strong>: {{loginResult.message}}
       </mat-error>
     </p>
-    <!-- Name -->
+
     <mat-form-field>
       <mat-label>Email:</mat-label>
       <input matInput formControlName="email" required
-             placeholder="Insert email">
+             placeholder="Insert email" >
       <mat-error *ngFor="let error of getErrors(getErrorControl('email')!,'Email')">
         {{error}}
       </mat-error>
     </mat-form-field>
-    <!-- Lat -->
+
     <mat-form-field>
       <mat-label>Password:</mat-label>
       <input matInput type="password" formControlName="password" required autocomplete
-             placeholder="Insert Password">
+             placeholder="Insert Password" >
       <mat-error *ngFor="let error of getErrors(getErrorControl('password')!,'Password')">
         {{error}}
       </mat-error>
@@ -27,11 +27,11 @@
     <div>
       <button mat-flat-button color="primary"
               type="submit">
-        Login
+        Авторизация
       </button>
       <button mat-flat-button color="secondary"
               [routerLink]="['/']">
-        Cancel
+        Отмена
       </button>
     </div>
   </form>
